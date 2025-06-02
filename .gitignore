@@ -1,2 +1,3 @@
 *.csv
 *.tsv
+!nettoyage_des_donnees.csv
