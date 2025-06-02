@@ -1,3 +1,5 @@
 *.csv
 *.tsv
 venv
+!nettoyage_des_donnees.csv
+
