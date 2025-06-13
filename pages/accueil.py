@@ -64,7 +64,7 @@ def accueil():
 
     # 2e Graphique: Nombre de films par année
 
-    df = pd.read_csv('data/nettoyage_des_donnees.csv')
+    df = st.session_state["df"]
     df_films_per_year = df.groupby("startYear").size().reset_index(name="Nombre de films")
     fig2 = px.bar(df_films_per_year, x='startYear', y='Nombre de films', title='Nombre de films par année')
     fig2.update_layout(xaxis=dict(tickangle=45),height=500, title_x=0.5)

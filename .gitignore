@@ -2,4 +2,6 @@
 *.tsv
 venv
 !nettoyage_des_donnees.csv
+__pycache__
+*.pyc
 
