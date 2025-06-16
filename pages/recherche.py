@@ -4,11 +4,15 @@ from outils.yt_link import get_youtube_trailer
 def recherche():
     df = st.session_state["df"]
     pick_movies = st.selectbox("Tapez le nom d'un film qui vous plait",
-                df["originalTitle"].unique(),index=None)
+                df.index,index=None)
     if pick_movies is not None:
-        selected_movie = df[df["originalTitle"] == pick_movies] # créé un filtre qui affiche la ligne du film selctionné
+        selected_movie = df.loc[[pick_movies]] # créé un filtre qui affiche la ligne du film selctionné
         image_url = selected_movie["poster_path"].iloc[0]  # Récupérer l'URL de l'image
-        st.image(image_url, caption=pick_movies)  # Afficher l'image
+        st.image(image_url, caption=pick_movies, width=300)  # Afficher l'image
+        clicked = st.button("Accéder à la reco")
+        if clicked:
+            st.session_state["selected_movie"] = selected_movie.index[0]
+            st.rerun()
         title = selected_movie["originalTitle"].iloc[0]
         year = selected_movie["startYear"].iloc[0]
         overview = selected_movie["overview"].iloc[0]
@@ -26,8 +30,8 @@ def recherche():
         st.write(overview)
 
         # Chargement de l'iframe pour la bande annonce
-        title_encoded = selected_movie["encodedTitle"].iloc[0]
-        get_youtube_trailer(title_encoded)
+        #title_encoded = selected_movie["encodedTitle"].iloc[0]
+        #get_youtube_trailer(title_encoded)
 
     # Colonnes à afficher dans le tableau
     columns_to_display = ["originalTitle", "startYear", "runtimeMinutes", "averageRating", "original_language"]

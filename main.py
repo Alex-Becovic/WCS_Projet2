@@ -8,9 +8,9 @@ from streamlit_option_menu import option_menu
 
 @st.cache_data
 def load_data():
-    return pd.read_csv('data/nettoyage_des_donnees_VF2.csv')
+    return pd.read_csv('data/nettoyage_des_donnees_VF2.csv').set_index("index")
 
-st.session_state["df"] = pd.read_csv('data/nettoyage_des_donnees_VF2.csv')
+st.session_state["df"] = load_data()
 with st.sidebar:
     selected = option_menu("Menu", ["Accueil", 'Recherche', 'Recommandation'], 
         icons=['house', 'film', 'sign-intersection'], menu_icon="cast", default_index=0)
@@ -19,5 +19,5 @@ if selected == "Accueil":
     accueil()
 elif selected == "Recherche":
     recherche()
-elif selected == "Reco":
+elif selected == "Recommandation":
     recommandation()
