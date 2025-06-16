@@ -11,6 +11,7 @@ def load_data():
     return pd.read_csv('data/nettoyage_des_donnees_VF2.csv').set_index("index")
 
 st.session_state["df"] = load_data()
+st.markdown("<style>[data-testid=stSidebarNav]{display:None;}</style>", unsafe_allow_html=True)
 with st.sidebar:
     selected = option_menu("Menu", ["Accueil", 'Recherche', 'Recommandation'], 
         icons=['house', 'film', 'sign-intersection'], menu_icon="cast", default_index=0)
