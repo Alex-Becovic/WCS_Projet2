@@ -11,10 +11,15 @@ def load_data():
     return pd.read_csv('data/nettoyage_des_donnees_VF2.csv').set_index("index")
 
 st.session_state["df"] = load_data()
+if "page" not in st.session_state:
+    st.session_state["page"] = "Accueil"
+st.markdown("<style>[data-testid=stSidebarNav]{display:None;}</style>", unsafe_allow_html=True)
 with st.sidebar:
     selected = option_menu("Menu", ["Accueil", 'Recherche', 'Recommandation'], 
-        icons=['house', 'film', 'sign-intersection'], menu_icon="cast", default_index=0)
+        icons=['house', 'film', 'sign-intersection'], menu_icon="cast", default_index=["Accueil", "Recherche", "Recommandation"].index(st.session_state["page"]))
     st.write(selected)
+if st.session_state["page"] != selected:
+    st.session_state.page = selected
 if selected == "Accueil":
     accueil()
 elif selected == "Recherche":
