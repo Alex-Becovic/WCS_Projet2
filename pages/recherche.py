@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from outils.yt_link import get_youtube_trailer
+import requests
 
 def recherche():
     df = st.session_state["df"]
@@ -38,6 +39,30 @@ def recherche():
         st.markdown(f"**Production** : {production}")
         st.markdown("### Synopsis")
         st.write(overview)
+
+# Chargement de l'iframe pour la bande annonce
+        title_encoded = selected_movie["encodedTitle"].iloc[0]
+        trailer_url = f"https://www.youtube.com/results?search_query={title_encoded}+trailer"
+        st.markdown("🎥 Bande annonce officielle")
+
+# Récupérer la première vidéo de la recherche YouTube
+        response = requests.get(trailer_url)
+        if response.status_code == 200:
+    # Extraire l'ID de la première vidéo (simplifié pour cet exemple)
+            try:
+                video_id = response.text.split('watch?v=')[1].split('"')[0]
+                video_url = f"https://www.youtube.com/embed/{video_id}"
+                st.markdown(f"""
+                    <iframe width="560" height="315" src="{video_url}" 
+                    frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen></iframe>
+                """, unsafe_allow_html=True)
+            except IndexError:
+                st.error("Impossible de récupérer la bande-annonce.")
+        else:
+            st.error("Impossible de récupérer la bande-annonce.")
+    else:
+        st.error("Veuillez sélectionner un film pour afficher les informations.")
 
         # get_youtube_trailer(title)  # décommenter si la fonction est prête
 
