@@ -1,10 +1,10 @@
 import streamlit as st
 import pandas as pd
 
-df_reco = pd.read_csv('data/dico_reco_2.csv')
-df_reco = df_reco.set_index("index")
+
 def recommandation():
     df = st.session_state["df"]
+    df_reco = st.session_state["df_reco"]
     st.title("Page de Recommandation")
     if "selected_movie" not in st.session_state:
         st.error("Aucun film sélectionné. Veuillez revenir à la page de recherche.")

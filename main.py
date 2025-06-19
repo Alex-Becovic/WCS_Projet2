@@ -10,7 +10,11 @@ from streamlit_option_menu import option_menu
 def load_data():
     return pd.read_csv('data/nettoyage_des_donnees_VF2.csv').set_index("index")
 
+@st.cache_data
+def load_reco():
+    return pd.read_csv('data/dico_reco_2.csv').set_index("index")
 st.session_state["df"] = load_data()
+st.session_state["df_reco"] = load_reco()
 if "page" not in st.session_state:
     st.session_state["page"] = "Accueil"
 st.markdown("<style>[data-testid=stSidebarNav]{display:None;}</style>", unsafe_allow_html=True)
