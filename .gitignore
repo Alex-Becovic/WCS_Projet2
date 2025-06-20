@@ -1,7 +1,9 @@
 *.csv
 *.tsv
 venv
-!nettoyage_des_donnees.csv
+!nettoyage_des_donnees_VF2.csv
+!dico_reco_2.csv
+!genres.csv
 __pycache__
 *.pyc
 
