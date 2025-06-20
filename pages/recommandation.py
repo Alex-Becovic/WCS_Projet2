@@ -3,7 +3,6 @@ import os
 from google import genai
 from google.genai import types
 import pandas as pd
-from IPython.display import display, Markdown
 
 GOOGLE_API_KEY="AIzaSyAITEeCyfnW3Rf5RokHRcHA-2ORzfJw_d4"
 client = genai.Client(api_key=GOOGLE_API_KEY)
