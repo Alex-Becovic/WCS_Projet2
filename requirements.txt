@@ -1,0 +1,5 @@
+plotly
+matplotlib
+pandas
+requests
+google-genai
