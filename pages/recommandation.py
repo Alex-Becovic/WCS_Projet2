@@ -7,11 +7,6 @@ import pandas as pd
 GOOGLE_API_KEY="AIzaSyAITEeCyfnW3Rf5RokHRcHA-2ORzfJw_d4"
 client = genai.Client(api_key=GOOGLE_API_KEY)
 
-
-from dotenv import load_dotenv
-load_dotenv()
-
-
 def recommandation():
     df = st.session_state["df"]
     df_reco = st.session_state["df_reco"]
